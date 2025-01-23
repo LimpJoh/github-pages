@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFID Test Page</title>
+</head>
+<body>
+    <h1>RFID Ljudspelare</h1>
+    <p>Scanna en RFID-tagg för att spela upp rätt ljud.</p>
+    <div id="status">Väntar på tagg...</div>
+    <audio id="audio-player" controls></audio>
+
+    <script>
+        // Mappa UID (RFID-taggar) till ljudfiler
+        const tagToSound = {
+            "1234567890": "audio1.mp3", // Byt till faktiska taggar och ljud
+            "0987654321": "audio2.mp3",
+            "1122334455": "audio3.mp3"
+        };
+
+        // Simulera RFID-inläsning (Byt ut detta mot riktig datahantering vid behov)
+        document.addEventListener("keydown", (event) => {
+            const testTag = event.key; // Simulerar tag-ID via tangentbord
+            handleRFIDTag(testTag);
+        });
+
+        function handleRFIDTag(tagID) {
+            const status = document.getElementById("status");
+            const audioPlayer = document.getElementById("audio-player");
+
+            if (tagToSound[tagID]) {
+                status.textContent = `Spelar upp ljud för tagg: ${tagID}`;
+                audioPlayer.src = tagToSound[tagID];
+                audioPlayer.play();
+            } else {
+                status.textContent = `Okänd tagg: ${tagID}`;
+            }
+        }
+    </script>
+</body>
+</html>
